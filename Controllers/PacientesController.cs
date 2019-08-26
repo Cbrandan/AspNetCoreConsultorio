@@ -19,12 +19,27 @@ namespace MiPrimerMVC.Controllers
 
          public async Task<IActionResult> Pacientes()
         {
-            var ItemsPacientes = await _PacienteItemService.GetIncompleteItemAsync();
+            var ItemsPacientes = await _PacienteItemService.GetPacientesAsync();
             var model = new PacientesViewModel(){
                 ListaPacientes = ItemsPacientes
             };
 
             return View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPaciente(Paciente newPaciente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Paciente");
+            }
+            var successful = await _PacienteItemService.AddPacienteAsync(newPaciente);
+            if (!successful)
+            {
+                return BadRequest("No se pudo agregar al paciente.");
+            }
+            return RedirectToAction("Paciente");
         }
     }
 }

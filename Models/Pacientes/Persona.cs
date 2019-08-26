@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 namespace AspNetCoreConsultorio.Models
 {
-public abstract class Persona
+/* public abstract class Persona
 {
     public Guid Id { get; set; }
     [Required]
@@ -12,7 +12,7 @@ public abstract class Persona
     public char Sexo { get; set; }
     public DateTimeOffset Fecha_Nacimiento { get; set; }
 
-       protected Persona(int dni, string apellido, string nombre, char sexo, DateTimeOffset fecha_nacimiento)
+   protected Persona(int dni, string apellido, string nombre, char sexo, DateTimeOffset fecha_nacimiento)
     {
         DNI = dni;
         Apellido = apellido;
@@ -20,5 +20,5 @@ public abstract class Persona
         Sexo = sexo;
         Fecha_Nacimiento = fecha_nacimiento;
     }
-}
+} */
 }

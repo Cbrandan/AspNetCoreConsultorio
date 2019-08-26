@@ -13,12 +13,11 @@ namespace AspNetCoreConsultorio.Data
             : base(options)
         {
         }
+        public DbSet<Paciente> Pacientes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
         base.OnModelCreating(builder);
         // ...
         }
-        public DbSet<Paciente> Pacientes { get; set; }
-
     }
 }

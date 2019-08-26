@@ -7,6 +7,7 @@ namespace AspNetCoreConsultorio.Services
 {
     public interface IPacienteItemService
     {
-        Task<Paciente[]> GetIncompleteItemAsync();
+        Task<Paciente[]> GetPacientesAsync();
+        Task<bool> AddPacienteAsync(Paciente newPaciente);
     }
 }

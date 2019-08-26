@@ -1,0 +1,7 @@
+@model Paciente
+
+<form asp-action="/Pacientes/AddPaciente" method="POST">
+    <label asp-for="DNI">Agregar un nuevo paciente:</label>
+    <input asp-for="DNI">
+    <button type="submit">Agregar</button>
+</form>

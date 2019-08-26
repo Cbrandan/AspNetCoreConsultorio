@@ -1,4 +1,4 @@
-using System;
+/* using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetCoreConsultorio.Models;
@@ -29,4 +29,4 @@ namespace AspNetCoreConsultorio.Services
             return Task.FromResult(new[] { Paciente1, Paciente2 });
         }
     }
-}
+} */

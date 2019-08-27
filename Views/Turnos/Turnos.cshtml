@@ -1,0 +1,30 @@
+@model TurnosViewModel
+
+@{
+    ViewData["Title"] = "Asignación de Turnos";
+}
+<div class="panel panel-default todo-panel">
+<div class="panel-heading">@ViewData["Title"]</div>
+<table class="table table-hover">
+<thead>
+<tr>
+<td>Paciente</td>
+<td>Dr./Dra.</td>
+<td>Especialidad</td>
+<td>Fecha</td>
+</tr>
+</thead>
+@foreach (var item in Model.ListaTurnos)
+{
+<tr>
+<td>@item.DniPaciente</td>
+<td>@item.IdProfesional</td>
+<td>@item.IdEspecialidad</td>
+<td>@item.Fecha</td>
+</tr>
+}
+</table>
+<div class="panel-footer add-item-form">
+    <!-- TODO: Add item form -->
+</div>
+</div>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using AspNetCoreConsultorio.Models;
 using AspNetCoreConsultorio.Services;
 
-namespace MiPrimerMVC.Controllers
+namespace AspNetCoreConsultorio.Controllers
 {
     public class PacientesController : Controller
     {

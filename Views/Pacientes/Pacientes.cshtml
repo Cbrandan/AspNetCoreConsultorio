@@ -1,37 +1,45 @@
 @model PacientesViewModel
 @using Humanizer
 
-@{
-    ViewData["Title"] = "Administración de listado de Pacientes";
-}
-<div class="panel panel-default todo-panel">
-<div class="panel-heading">@ViewData["Title"]</div>
-<table class="table table-hover">
-<thead>
-<tr>
-@*<td>&#x2714;</td>*@
-<td>DNI</td>
-<td>Nombre</td>
-<td>Apellido</td>
-<td>Sexo</td>
-<td>Nacimiento</td>
-<td>Alta</td>
-</tr>
-</thead>
-@foreach (var item in Model.ListaPacientes)
-{
-<tr>
-<td>@item.DNI</td>
-<td>@item.Nombre</td>
-<td>@item.Apellido</td>
-<td>@item.Sexo</td>
-<td>@item.Fecha_Nacimiento.Humanize()</td>
-<td>@item.Fecha_Alta.Humanize()</td>
-</tr>
-}
-</table>
+@{ var Title = "Administración de Pacientes";}
+@{ViewData["Title"] =Title;}
+
+<div class="jumbotron text-center">
+  <h1>@Title</h1>
+  <p>Realice la carga, modificación y eliminación de pacientes!</p> 
+</div>
+
 <div class="panel-footer add-item-form">
-    <!-- TODO: Add item form -->
+    <!-- Pacientes: Add item form -->
     @await Html.PartialAsync("AddPacientePartial", new Paciente())
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-fixed">
+        <thead>
+            <tr>
+                @*<th>&#x2714;</th>*@
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Sexo</th>
+                <th>Nacimiento</th>
+                <th>Alta</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.ListaPacientes)
+        {
+            <tr>
+                <td>@item.DNI</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellido</td>
+                <td>@item.Sexo</td>
+                <td>@item.Fecha_Nacimiento.Humanize()</td>
+                <td>@item.Fecha_Alta.Humanize()</td>
+            </tr>
+        }
+        </table>
+    </div>
 </div>

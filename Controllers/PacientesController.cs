@@ -39,7 +39,7 @@ namespace AspNetCoreConsultorio.Controllers
             {
                 return BadRequest("No se pudo agregar al paciente.");
             }
-            return RedirectToAction("Paciente");
+            return RedirectToAction("Pacientes");
         }
     }
 }

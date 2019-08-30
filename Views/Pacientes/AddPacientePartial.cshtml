@@ -1,7 +1,42 @@
 @model Paciente
 
-<form asp-action="/Pacientes/AddPaciente" method="POST">
-    <label asp-for="DNI">Agregar un nuevo paciente:</label>
-    <input asp-for="DNI">
-    <button type="submit">Agregar</button>
-</form>
+<div class="container">
+    <form asp-action="AddPaciente" method="POST">
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="numeric" class="form-control" asp-for="DNI" placeholder="Ingrese DNI" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Apellido" placeholder="Ingrese Apellido" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Nombre" placeholder="Ingrese Nombre" required autofocus>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Sexo" placeholder="Seleccione sexo" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="date" class="form-control" asp-for="Fecha_Nacimiento" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <button type="submit" class="btn btn-primary">
+                    Agregar
+                </button>
+                <br>
+            </div>
+        </div>
+    </form>
+</div>

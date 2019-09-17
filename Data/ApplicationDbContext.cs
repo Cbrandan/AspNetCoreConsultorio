@@ -14,6 +14,7 @@ namespace AspNetCoreConsultorio.Data
         {
         }
         public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Turno> Turnos { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
         base.OnModelCreating(builder);

@@ -48,6 +48,7 @@ namespace AspNetCoreConsultorio
 
             //services.AddSingleton<IPacienteItemService, FakePacienteItemService>();
             services.AddScoped<IPacienteItemService, PacienteItemService>();
+            services.AddScoped<ITurnoItemService, TurnoItemService>();
             
         }
 

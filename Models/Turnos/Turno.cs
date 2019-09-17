@@ -17,10 +17,5 @@ namespace AspNetCoreConsultorio.Models
         public string Observaciones { get; set; }
         public bool Realizado { get; set; }
 
-/*         public Turno(int pDni, int pEspecialidad, int pProfesional, DateTimeOffset pFecha)
-        {
-            //Constructor
-        } */
-
     }
 }

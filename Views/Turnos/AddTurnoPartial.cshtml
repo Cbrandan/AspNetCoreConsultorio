@@ -1,0 +1,47 @@
+﻿@model AspNetCoreConsultorio.Models.Turno
+
+<h4>Turno</h4>
+<hr />
+<div class="row">
+    <div class="col-sm-4 form-horizontal">
+        <form asp-action="AddTurnoPartial">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="DniPaciente" class="form-control" value="null" placeholder="Ingrese DNI" required autofocus />
+                <span asp-validation-for="DniPaciente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="number" asp-for="IdEspecialidad" class="form-control" value="null" placeholder="Ingrese Especialidad" required autofocus />
+                <span asp-validation-for="IdEspecialidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdProfesional" class="form-control"  value="null" placeholder="Ingrese Profesional" required autofocus />
+                <span asp-validation-for="IdProfesional" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="datetime" asp-for="Fecha" class="form-control"  placeholder="Ingrese Fecha" required autofocus />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Observaciones" class="form-control" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Realizado" /> @Html.DisplayNameFor(model => model.Realizado)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

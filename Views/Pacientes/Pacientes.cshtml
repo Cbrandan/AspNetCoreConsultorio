@@ -38,7 +38,10 @@
                 <td>@item.Sexo</td>
                 <td>@item.Fecha_Nacimiento.Humanize()</td>
                 <td>@item.Fecha_Alta.Humanize()</td>
-            </tr>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.DNI }) </td>
+                <td>@Html.ActionLink("Details", "Details", new { id = item.DNI })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.DNI })</td>
+</tr>
         }
         </table>
     </div>

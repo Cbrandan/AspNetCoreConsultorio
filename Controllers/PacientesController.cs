@@ -17,10 +17,10 @@ namespace AspNetCoreConsultorio.Controllers
             _PacienteItemService = PacienteItemService;
         }
 
-         public async Task<IActionResult> Pacientes()
+        public async Task<IActionResult> Pacientes()
         {
             var ItemsPacientes = await _PacienteItemService.GetPacientesAsync();
-            var model = new PacientesViewModel(){
+            var model = new PacientesViewModel() {
                 ListaPacientes = ItemsPacientes
             };
 
@@ -28,12 +28,15 @@ namespace AspNetCoreConsultorio.Controllers
         }
 
         [ValidateAntiForgeryToken]
+        //Lo que recibo como parametro es un Model Paciente que se llama "newPaciente"
         public async Task<IActionResult> AddPaciente(Paciente newPaciente)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Paciente");
+                return RedirectToAction("Pacientes");
             }
+            //Si el Model es valido, lo que hago es llamar al método AddPacienteAsync definido en la
+            // variable _PacienteItemService del tipo Interfaz (IPacienteItemAsync)
             var successful = await _PacienteItemService.AddPacienteAsync(newPaciente);
             if (!successful)
             {
@@ -41,5 +44,19 @@ namespace AspNetCoreConsultorio.Controllers
             }
             return RedirectToAction("Pacientes");
         }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BorrarPaciente(int dniPaciente)
+        {
+            var borrado = await _PacienteItemService.BorrarPaciente(dniPaciente);
+            if (!borrado)
+            {
+                return BadRequest($"No se pudo eliminar al paciente con DNI....");
+            }
+
+            return RedirectToAction("Pacientes");
+
+        }
+
     }
 }

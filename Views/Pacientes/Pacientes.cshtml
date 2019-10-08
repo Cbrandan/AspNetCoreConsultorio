@@ -38,10 +38,16 @@
                 <td>@item.Sexo</td>
                 <td>@item.Fecha_Nacimiento.Humanize()</td>
                 <td>@item.Fecha_Alta.Humanize()</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { id = item.DNI }) </td>
-                <td>@Html.ActionLink("Details", "Details", new { id = item.DNI })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = item.DNI })</td>
-</tr>
+                <td>@Html.ActionLink("Editar", "Editar", new { id = item.DNI }) </td>
+                <td>@Html.ActionLink("Detalles", "Detalles", new { id = item.DNI })</td>
+                <td>
+                    <form asp-action="BorrarPaciente" method="POST">
+                        <input type="submit" class="accept-policy" value="Borrar"/>
+                        <input type="hidden" name="dniPaciente" value="@item.DNI"/>
+                    </form>
+                </td>
+                @*<td>@Html.ActionLink("Borrar", "BorrarPaciente", new { id = @item.DNI})</td>*@
+            </tr>
         }
         </table>
     </div>

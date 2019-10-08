@@ -33,5 +33,22 @@ namespace AspNetCoreConsultorio.Services
             return paciente;
         }
 
+        public async Task<bool> BorrarPaciente(int dni)
+        {
+            //_context.Pacientes.Find(dni);
+            //return true;
+            _context.RemoveRange(_context.Pacientes.Where(x => x.DNI == dni));
+            var saveResult = await _context.SaveChangesAsync();
+
+            return saveResult == 1;
+        }
+
+
+//        public async Task<Paciente> GetPacienteAsync(int idPaciente)
+//       {
+//           var pa = await _context.Pacientes.Remove()
+//
+//
+//       }
     }
 }

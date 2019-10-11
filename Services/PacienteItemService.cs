@@ -43,6 +43,12 @@ namespace AspNetCoreConsultorio.Services
             return saveResult == 1;
         }
 
+        public async Task<Paciente> GetPacienteAsync(int dni)
+        {
+            var paciente = await _context.Pacientes.Where(x => x.DNI == dni).FirstOrDefaultAsync();
+            return paciente;
+        }
+
 
 //        public async Task<Paciente> GetPacienteAsync(int idPaciente)
 //       {

@@ -58,5 +58,29 @@ namespace AspNetCoreConsultorio.Controllers
 
         }
 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Paciente(int dniPaciente)
+        {
+            var ItemPaciente = await _PacienteItemService.GetPacienteAsync(dniPaciente);
+            var model = new Paciente()
+            {
+                DNI = ItemPaciente.DNI,
+                Apellido = ItemPaciente.Apellido,
+                Nombre = ItemPaciente.Nombre,
+                Sexo = ItemPaciente.Sexo,
+                Fecha_Nacimiento = ItemPaciente.Fecha_Nacimiento,
+                Fecha_Alta = ItemPaciente.Fecha_Alta
+    };
+
+            return View("AddPacientePartial", model);
+
+
+
+
+        }
+
+
+
+
     }
 }

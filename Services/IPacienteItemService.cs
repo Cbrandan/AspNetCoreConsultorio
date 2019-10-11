@@ -10,6 +10,7 @@ namespace AspNetCoreConsultorio.Services
         Task<Paciente[]> GetPacientesAsync();
         Task<bool> AddPacienteAsync(Paciente newPaciente);
         Task<bool> BorrarPaciente(int dni);
+        Task<Paciente> GetPacienteAsync(int dni);
         //Task<Paciente> GetPacienteAsync(int IdPaciente);
     }
 }

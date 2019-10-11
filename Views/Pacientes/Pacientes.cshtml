@@ -11,10 +11,16 @@
 
 <div class="panel-footer add-item-form">
     <!-- Pacientes: Add item form -->
-    @await Html.PartialAsync("AddPacientePartial", new Paciente())
+    @*@await Html.PartialAsync("AddPacientePartial", new Paciente())*@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-footer add-item-form">
+        <a href="~/Pacientes/AddPacientePartial" class="btn-primary">
+            Agregar PAciente...
+        </a>
+
+    </div>
     <div class="panel-body">
         <table class="table table-fixed">
         <thead>
@@ -23,9 +29,9 @@
                 <th>DNI</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Sexo</th>
+                @*<th>Sexo</th>
                 <th>Nacimiento</th>
-                <th>Alta</th>
+                <th>Alta</th>*@
             </tr>
         </thead>
         <tbody>
@@ -35,15 +41,27 @@
                 <td>@item.DNI</td>
                 <td>@item.Nombre</td>
                 <td>@item.Apellido</td>
-                <td>@item.Sexo</td>
-                <td>@item.Fecha_Nacimiento.Humanize()</td>
-                <td>@item.Fecha_Alta.Humanize()</td>
-                <td>@Html.ActionLink("Editar", "Editar", new { id = item.DNI }) </td>
-                <td>@Html.ActionLink("Detalles", "Detalles", new { id = item.DNI })</td>
+                @*<td>@item.Sexo</td>*@
+                <td>@*@item.Fecha_Nacimiento.Humanize()*@</td>
+                <td>@*@item.Fecha_Alta.Humanize()*@</td>
+                <td>@*@Html.ActionLink("Editar", "Editar", new { id = item.DNI })*@ </td>
+                @*<td>@Html.ActionLink("Detalles", "Detalles", new { id = item.DNI })</td>*@
+                <td>
+                    <form asp-action="Paciente" method="POST">
+                        <input type="submit" class="accept-policy" value="Detalles" />
+                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Paciente" method="POST">
+                        <input type="submit" class="accept-policy" value="Modificar" />
+                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
+                    </form>
+                </td>
                 <td>
                     <form asp-action="BorrarPaciente" method="POST">
-                        <input type="submit" class="accept-policy" value="Borrar"/>
-                        <input type="hidden" name="dniPaciente" value="@item.DNI"/>
+                        <input type="submit" class="accept-policy" value="Borrar" />
+                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
                     </form>
                 </td>
                 @*<td>@Html.ActionLink("Borrar", "BorrarPaciente", new { id = @item.DNI})</td>*@

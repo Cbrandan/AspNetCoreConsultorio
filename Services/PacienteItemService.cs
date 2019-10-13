@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AspNetCoreConsultorio.Data;
 using AspNetCoreConsultorio.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AspNetCoreConsultorio.Services
 {
@@ -33,7 +32,7 @@ namespace AspNetCoreConsultorio.Services
             return paciente;
         }
 
-        public async Task<bool> BorrarPaciente(int dni)
+        public async Task<bool> BorrarPacienteAsync(int dni)
         {
             //_context.Pacientes.Find(dni);
             //return true;
@@ -49,12 +48,23 @@ namespace AspNetCoreConsultorio.Services
             return paciente;
         }
 
+        public async Task<bool> ModifyPacienteAsync(Paciente modPaciente)
+        {
+            var paciente = await _context.Pacientes.Where(x => x.DNI == modPaciente.DNI).FirstOrDefaultAsync();
 
-//        public async Task<Paciente> GetPacienteAsync(int idPaciente)
-//       {
-//           var pa = await _context.Pacientes.Remove()
-//
-//
-//       }
+            paciente = modPaciente;
+            //paciente.DNI = modPaciente.DNI;
+            //paciente.Apellido = modPaciente.Apellido;
+            //paciente.Nombre = modPaciente.Nombre;
+            //paciente.Sexo = modPaciente.Sexo;
+            //paciente.Fecha_Nacimiento = modPaciente.Fecha_Nacimiento;
+            //paciente.Fecha_Alta = modPaciente.Fecha_Alta;
+
+            //_context.Pacientes.UpdateRange(paciente);
+
+            var saveResult = await _context.SaveChangesAsync();
+
+            return saveResult == 1;
+        }
     }
 }

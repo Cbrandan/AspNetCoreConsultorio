@@ -1,44 +1,39 @@
 @model Paciente
-
-<div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-dialog-centered"
-        <form asp-action="form-group">
-            <div class="row">
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <input type="number" asp-for="DNI" class="form-control" value="@Model.DNI">
-                    <br>
-                </div>
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <input type="text" asp-for="Apellido" class="form-control" value="@Model.Apellido">
-                    <br>
-                </div>
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <input type="text" asp-for="Nombre" class="form-control" value="@Model.Nombre">
-                    <br>
-                </div>
+<div class="container">
+    <form asp-action="form-group">
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="number" class="form-control" asp-for="DNI" value="@Model.DNI" disabled>
+                <br>
             </div>
-            <div class="row">
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <input type="text" asp-for="Sexo" class="form-control" value="@Model.Sexo">
-                    <br>
-                </div>
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <input type="date" asp-for="Fecha_Nacimiento" class="form-control" value="@Model.Fecha_Nacimiento">
-                    <br>
-                </div>
-                <div class="col-sm-4 form-horizontal">
-                    <br>
-                    <button type="submit" class="btn btn-primary">
-                        Volver
-                    </button>
-                    <br>
-                </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido" disabled>
+                <br>
             </div>
-        </form>
-    </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre" disabled>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Sexo" value="@Model.Sexo" disabled>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="date" class="form-control" asp-for="Fecha_Nacimiento" value="@Model.Fecha_Nacimiento" disabled>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                    <a href="Pacientes" class="btn btn-outline-secondary">Atras</a>
+                <br>
+            </div>
+        </div>
+    </form>
 </div>

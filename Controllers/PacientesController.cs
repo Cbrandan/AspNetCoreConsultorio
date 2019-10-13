@@ -28,15 +28,13 @@ namespace AspNetCoreConsultorio.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        //Lo que recibo como parametro es un Model Paciente que se llama "newPaciente"
+        [HttpPost]
         public async Task<IActionResult> AddPaciente(Paciente newPaciente)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Pacientes");
             }
-            //Si el Model es valido, lo que hago es llamar al método AddPacienteAsync definido en la
-            // variable _PacienteItemService del tipo Interfaz (IPacienteItemAsync)
             var successful = await _PacienteItemService.AddPacienteAsync(newPaciente);
             if (!successful)
             {
@@ -45,10 +43,18 @@ namespace AspNetCoreConsultorio.Controllers
             return RedirectToAction("Pacientes");
         }
 
+        [HttpGet]
+        public ViewResult AddPaciente()
+        {
+            Paciente Model = new Paciente();
+
+            return View("AddPacientePartial", Model);
+        }
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BorrarPaciente(int dniPaciente)
         {
-            var borrado = await _PacienteItemService.BorrarPaciente(dniPaciente);
+            var borrado = await _PacienteItemService.BorrarPacienteAsync(dniPaciente);
             if (!borrado)
             {
                 return BadRequest($"No se pudo eliminar al paciente con DNI....");
@@ -59,7 +65,7 @@ namespace AspNetCoreConsultorio.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Paciente(int dniPaciente)
+        public async Task<IActionResult> Paciente(int dniPaciente, char Modo)
         {
             var ItemPaciente = await _PacienteItemService.GetPacienteAsync(dniPaciente);
             var model = new Paciente()
@@ -70,17 +76,37 @@ namespace AspNetCoreConsultorio.Controllers
                 Sexo = ItemPaciente.Sexo,
                 Fecha_Nacimiento = ItemPaciente.Fecha_Nacimiento,
                 Fecha_Alta = ItemPaciente.Fecha_Alta
-    };
+            };
+            string vista = null;
 
-            return View("AddPacientePartial", model);
-
-
-
-
+            if (Modo == 'D')
+            {
+                vista = "DetailsPacientePartial";
+            }
+            else
+            {
+                if (Modo == 'M')
+                {
+                    vista = "ModifyPacientePartial";
+                }
+            }
+            return View(vista, model);
         }
 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ModifyPaciente(Paciente modPaciente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Pacientes");
+            }
+            var successful = await _PacienteItemService.ModifyPacienteAsync(modPaciente);
 
-
-
+            if (!successful)
+            {
+                return BadRequest("No se pudo modificar el paciente.");
+            }
+            return RedirectToAction("Pacientes");
+        }
     }
 }

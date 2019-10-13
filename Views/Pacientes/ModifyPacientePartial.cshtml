@@ -1,0 +1,42 @@
+@model Paciente
+<div class="container">
+    <form asp-action="ModifyPaciente" method="post">
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="number" class="form-control" asp-for="DNI" value="@Model.DNI">
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido">
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" class="form-control" asp-for="Sexo" value="@Model.Sexo">
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="date" class="form-control" asp-for="Fecha_Nacimiento" value="@Model.Fecha_Nacimiento">
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <div class="btn-group">
+                    <br>
+                        <button type="submit" class="btn btn-outline-success">Aceptar</button>
+                        <button href="Pacientes" class="btn btn-outline-danger">Cancelar</button>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

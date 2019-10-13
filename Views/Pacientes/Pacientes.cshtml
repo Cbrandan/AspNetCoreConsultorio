@@ -15,58 +15,50 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-footer add-item-form">
-        <a href="~/Pacientes/AddPacientePartial" class="btn-primary">
-            Agregar PAciente...
-        </a>
-
-    </div>
     <div class="panel-body">
         <table class="table table-fixed">
-        <thead>
-            <tr>
-                @*<th>&#x2714;</th>*@
-                <th>DNI</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                @*<th>Sexo</th>
-                <th>Nacimiento</th>
-                <th>Alta</th>*@
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.ListaPacientes)
-        {
-            <tr>
-                <td>@item.DNI</td>
-                <td>@item.Nombre</td>
-                <td>@item.Apellido</td>
-                @*<td>@item.Sexo</td>*@
-                <td>@*@item.Fecha_Nacimiento.Humanize()*@</td>
-                <td>@*@item.Fecha_Alta.Humanize()*@</td>
-                <td>@*@Html.ActionLink("Editar", "Editar", new { id = item.DNI })*@ </td>
-                @*<td>@Html.ActionLink("Detalles", "Detalles", new { id = item.DNI })</td>*@
-                <td>
-                    <form asp-action="Paciente" method="POST">
-                        <input type="submit" class="accept-policy" value="Detalles" />
-                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="Paciente" method="POST">
-                        <input type="submit" class="accept-policy" value="Modificar" />
-                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="BorrarPaciente" method="POST">
-                        <input type="submit" class="accept-policy" value="Borrar" />
-                        <input type="hidden" name="dniPaciente" value="@item.DNI" />
-                    </form>
-                </td>
-                @*<td>@Html.ActionLink("Borrar", "BorrarPaciente", new { id = @item.DNI})</td>*@
-            </tr>
-        }
+            <thead>
+                <tr>
+                    @*<th>&#x2714;</th>*@
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListaPacientes)
+                {
+                    <tr>
+                        <td>@item.DNI</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellido</td>
+                        <td align="center">
+                            <div class="btn-group">
+                                <form asp-action="Paciente" method="POST">
+                                    <input type="submit" class="btn btn-info" value="Detalles" />
+                                    <input type="hidden" name="dniPaciente" value="@item.DNI" />
+                                    <input type="hidden" name="Modo" value="D" />
+                                </form>
+
+                                <form asp-action="Paciente" method="POST">
+                                    <input type="submit" class="btn btn-info" value="Modificar" />
+                                    <input type="hidden" name="dniPaciente" value="@item.DNI" />
+                                    <input type="hidden" name="Modo" value="M" />
+                                </form>
+                                <form asp-action="BorrarPaciente" method="POST">
+                                    <input type="submit" class="btn btn-info" value="Borrar" />
+                                    <input type="hidden" name="dniPaciente" value="@item.DNI" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
         </table>
+    </div>
+    <div class="panel-footer">
+        @*@Html.ActionLink("Agregar paciente", "AddPaciente", "Pacientes");*@
+        <a href="/Pacientes/AddPaciente" class="btn btn-primary">Agregar paciente</a>
+
     </div>
 </div>

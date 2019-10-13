@@ -1,10 +1,10 @@
 @model Paciente
 <div class="container">
-<form asp-action="AddPaciente" method="POST">
+<form asp-action="/Pacientes/AddPaciente" method="POST">
     <div class="row">
         <div class="col-sm-4 form-horizontal">
             <br>
-            <input type="numeric" asp-for="DNI" class="form-control" placeholder="Ingrese DNI" value="" required autofocus>
+            <input type="number" asp-for="DNI" class="form-control" placeholder="Ingrese DNI" value="" required autofocus>
             <br>
         </div>
         <div class="col-sm-4 form-horizontal">

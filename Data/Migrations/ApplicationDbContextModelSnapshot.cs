@@ -57,12 +57,12 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fe7c82c0-c3ca-432f-bf98-16173acfeba6"),
+                            Id = new Guid("5155da31-fc90-4eeb-9b19-696a282396d2"),
                             Name = "Masculino"
                         },
                         new
                         {
-                            Id = new Guid("212f2644-12f6-4e03-9816-7d31b914bd74"),
+                            Id = new Guid("2ecdcb42-d337-4e1c-9922-10d83dc120ce"),
                             Name = "Femenino"
                         });
                 });

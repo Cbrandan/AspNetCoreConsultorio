@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreConsultorio.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191015012956_AddTablaSexos")]
-    partial class AddTablaSexos
+    [Migration("20191015044148_MigracionTablas")]
+    partial class MigracionTablas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,14 +34,16 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired();
 
-                    b.Property<char>("Sexo");
+                    b.Property<Guid>("SexoId");
 
                     b.HasKey("DNI");
+
+                    b.HasIndex("SexoId");
 
                     b.ToTable("Pacientes");
                 });
 
-            modelBuilder.Entity("AspNetCoreConsultorio.Models.Sexo.Sexo", b =>
+            modelBuilder.Entity("AspNetCoreConsultorio.Models.Sexos.Sexo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -53,6 +55,18 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TablaSexos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5155da31-fc90-4eeb-9b19-696a282396d2"),
+                            Name = "Masculino"
+                        },
+                        new
+                        {
+                            Id = new Guid("2ecdcb42-d337-4e1c-9922-10d83dc120ce"),
+                            Name = "Femenino"
+                        });
                 });
 
             modelBuilder.Entity("AspNetCoreConsultorio.Models.Turno", b =>
@@ -236,6 +250,14 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AspNetCoreConsultorio.Models.Paciente", b =>
+                {
+                    b.HasOne("AspNetCoreConsultorio.Models.Sexos.Sexo", "Sexo")
+                        .WithMany()
+                        .HasForeignKey("SexoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

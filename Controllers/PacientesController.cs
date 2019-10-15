@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreConsultorio.Models;
 using AspNetCoreConsultorio.Services;
+using AspNetCoreConsultorio.Models.Pacientes;
 
 namespace AspNetCoreConsultorio.Controllers
 {
@@ -46,7 +47,8 @@ namespace AspNetCoreConsultorio.Controllers
         [HttpGet]
         public ViewResult AddPaciente()
         {
-            Paciente Model = new Paciente();
+            // Paciente Model = new Paciente();
+            PacienteAddViewModel Model = new PacienteAddViewModel();
 
             return View("AddPacientePartial", Model);
         }

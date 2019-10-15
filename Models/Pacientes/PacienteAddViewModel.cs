@@ -16,7 +16,7 @@ namespace AspNetCoreConsultorio.Models.Pacientes
         public string Apellido { get; set; }
         [Required]
         public string Nombre { get; set; }
-
+        [Required]
         public Guid SexoId { get; set; }
         [Required]
         public List<Sexo> Sexos { get; set; }

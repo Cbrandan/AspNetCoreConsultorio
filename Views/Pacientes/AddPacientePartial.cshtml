@@ -1,46 +1,52 @@
-@model Paciente
-<div class="container">
-<form asp-action="/Pacientes/AddPaciente" method="POST">
-    <div class="row">
-        <div class="col-sm-4 form-horizontal">
-            <br>
-            <input type="number" asp-for="DNI" class="form-control" placeholder="Ingrese DNI" value="" required autofocus>
-            <br>
-        </div>
-        <div class="col-sm-4 form-horizontal">
-            <br>
-            <input type="text" asp-for="Apellido" class="form-control" placeholder="Ingrese Apellido" required autofocus>
-            <br>
-        </div>
-        <div class="col-sm-4 form-horizontal">
-            <br>
-            <input type="text" asp-for="Nombre" class="form-control" placeholder="Ingrese Nombre" required autofocus>
-            <br>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4 form-horizontal">
-            <br>
+@using AspNetCoreConsultorio.Models.Pacientes
+@using AspNetCoreConsultorio.Models.Sexos
 
-            <select asp-for="Sexo" class="form-control" placeholder="Seleccione sexo" required autofocus>
-                <option selected>Seleccione sexo</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-            </select>
-            <br>
+@model PacienteAddViewModel
+<div class="container">
+    <form asp-action="/Pacientes/AddPaciente" method="POST">
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="number" asp-for="DNI" class="form-control" placeholder="Ingrese DNI" value="" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" asp-for="Apellido" class="form-control" placeholder="Ingrese Apellido" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="text" asp-for="Nombre" class="form-control" placeholder="Ingrese Nombre" required autofocus>
+                <br>
+            </div>
         </div>
-        <div class="col-sm-4 form-horizontal">
-            <br>
-            <input type="date" asp-for="Fecha_Nacimiento" class="form-control" name="FechaNacimiento" value="04/09/2019" required autofocus>
-            <br>
+        <div class="row">
+            <div class="col-sm-4 form-horizontal">
+                <br>
+
+                @*<select asp-for="Sexo" class="form-control" placeholder="Seleccione sexo" required autofocus>
+                        <option selected>Seleccione sexo</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>*@
+
+                <select asp-for="SexoId" asp-items="@(new SelectList(Model.Sexos, "Id", "Name"))" class="form-control"></select>
+
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <input type="date" asp-for="Fecha_Nacimiento" class="form-control" name="FechaNacimiento" value="04/09/2019" required autofocus>
+                <br>
+            </div>
+            <div class="col-sm-4 form-horizontal">
+                <br>
+                <button type="submit" class="btn btn-primary">
+                    Agregar
+                </button>
+                <br>
+            </div>
         </div>
-        <div class="col-sm-4 form-horizontal">
-            <br>
-            <button type="submit" class="btn btn-primary">
-                Agregar
-            </button>
-            <br>
-        </div>
-    </div>
-</form>
+    </form>
 </div>

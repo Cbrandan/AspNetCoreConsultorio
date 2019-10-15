@@ -94,6 +94,7 @@ namespace AspNetCoreConsultorio.Controllers
         }
 
         [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> ModifyPaciente(Paciente modPaciente)
         {
             if (!ModelState.IsValid)

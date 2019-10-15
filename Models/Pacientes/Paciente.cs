@@ -1,5 +1,7 @@
+using AspNetCoreConsultorio.Models.Sexos;
 using System;
 using System.ComponentModel.DataAnnotations;
+
 namespace AspNetCoreConsultorio.Models
 {
 /* public class Paciente : Persona
@@ -24,10 +26,15 @@ namespace AspNetCoreConsultorio.Models
         [Required]
         [Key]
         public int DNI { get; set; }
+        [Required]
         public string Apellido { get; set; }
+        [Required]
         public string Nombre { get; set; }
-        public char Sexo { get; set; }
+        [Required]
+        public virtual Sexo Sexo { get; set; }
+        [Required]
         public DateTimeOffset Fecha_Nacimiento { get; set; }
+        [Required]
         public DateTimeOffset? Fecha_Alta { get; set; }
 
 /*         public Paciente(int dni, string apellido, string nombre, char sexo, DateTimeOffset fecha_nacimiento, DateTimeOffset fecha_alta)

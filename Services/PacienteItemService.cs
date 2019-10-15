@@ -52,13 +52,14 @@ namespace AspNetCoreConsultorio.Services
         {
             var paciente = await _context.Pacientes.Where(x => x.DNI == modPaciente.DNI).FirstOrDefaultAsync();
 
-            paciente = modPaciente;
-            //paciente.DNI = modPaciente.DNI;
-            //paciente.Apellido = modPaciente.Apellido;
-            //paciente.Nombre = modPaciente.Nombre;
-            //paciente.Sexo = modPaciente.Sexo;
-            //paciente.Fecha_Nacimiento = modPaciente.Fecha_Nacimiento;
-            //paciente.Fecha_Alta = modPaciente.Fecha_Alta;
+            if (paciente == null)
+                return false;
+
+            paciente.Apellido = modPaciente.Apellido;
+            paciente.Nombre = modPaciente.Nombre;
+            paciente.Sexo = modPaciente.Sexo;
+            paciente.Fecha_Nacimiento = modPaciente.Fecha_Nacimiento;
+            paciente.Fecha_Alta = modPaciente.Fecha_Alta;
 
             //_context.Pacientes.UpdateRange(paciente);
 

@@ -36,6 +36,9 @@ namespace AspNetCoreConsultorio.Models
         public DateTime Fecha_Nacimiento { get; set; }
         [Required]
         public DateTime? Fecha_Alta { get; set; }
+        [Required]
+        public string UserId { get; set; }
+
 
 /*         public Paciente(int dni, string apellido, string nombre, char sexo, DateTimeOffset fecha_nacimiento, DateTimeOffset fecha_alta)
         {

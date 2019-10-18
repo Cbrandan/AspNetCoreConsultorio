@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Identity
+<!-- @using AspNetCoreConsultorio.Data -->
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+@if (signInManager.IsSignedIn(User))
+{
+    var currentUser = await userManager.GetUserAsync(User);
+    <!-- var isAdmin = currentUser != null
+    && await userManager.IsInRoleAsync(
+        currentUser,
+        Constantes.AdministratorRole); -->
+    <!-- if (isAdmin) -->
+    <!-- { -->
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-controller="AdministrarUsuariosControler" asp-action="AdmUsers" class="nav-link text-dark">Administrar Usuarios</a>
+            </li>
+        </ul>
+    <!-- } -->
+}

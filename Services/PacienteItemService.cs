@@ -1,6 +1,7 @@
 using AspNetCoreConsultorio.Data;
 using AspNetCoreConsultorio.Models;
 using AspNetCoreConsultorio.Models.Pacientes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -21,10 +22,11 @@ namespace AspNetCoreConsultorio.Services
             _iSexoService = sexoService;
         }
 
-        public async Task<bool> AddPacienteAsync(Paciente newPaciente)
+        public async Task<bool> AddPacienteAsync(Paciente newPaciente, IdentityUser user)
         {
             //throw new NotImplementedException();
             newPaciente.Fecha_Alta = DateTime.Now;
+            newPaciente.UserId = user.Id;
             _context.Pacientes.Add(newPaciente);
             var saveResult = await _context.SaveChangesAsync();
             return saveResult == 1;

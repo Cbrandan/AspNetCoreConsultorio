@@ -7,22 +7,35 @@ using Microsoft.AspNetCore.Mvc;
 using AspNetCoreConsultorio.Models;
 using AspNetCoreConsultorio.Services;
 using AspNetCoreConsultorio.Models.Pacientes;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreConsultorio.Controllers
 {
+    [Authorize]
     public class PacientesController : Controller
     {
         private readonly IPacienteItemService _PacienteItemService;
         private readonly  ISexoService _sexoService;
-        public PacientesController(IPacienteItemService PacienteItemService, ISexoService sexoService)
+        
+        private readonly UserManager<IdentityUser> _userManager;
+        
+        public PacientesController(
+            IPacienteItemService PacienteItemService, 
+            ISexoService sexoService,
+            UserManager<IdentityUser> userManager)
         {
             _PacienteItemService = PacienteItemService;
             _sexoService = sexoService;
-
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Pacientes()
         {
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
+
             var ItemsPacientes = await _PacienteItemService.GetPacientesAsync();
             var model = new PacientesViewModel() {
                 ListaPacientes = ItemsPacientes
@@ -35,11 +48,14 @@ namespace AspNetCoreConsultorio.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPaciente(PacienteAddViewModel ModelPaciente)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
+
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
+
             var newPaciente = new Paciente{
                 DNI              = ModelPaciente.DNI,
                 Apellido         = ModelPaciente.Apellido,
@@ -48,7 +64,7 @@ namespace AspNetCoreConsultorio.Controllers
                 Fecha_Nacimiento = ModelPaciente.Fecha_Nacimiento
             };
 
-            var successful = await _PacienteItemService.AddPacienteAsync(newPaciente);
+            var successful = await _PacienteItemService.AddPacienteAsync(newPaciente, currentUser);
             if (!successful)
             {
                 return BadRequest("No se pudo agregar al paciente.");

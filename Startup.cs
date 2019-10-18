@@ -72,7 +72,7 @@ namespace AspNetCoreConsultorio
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); //Authorization
 
             app.UseMvc(routes =>
             {

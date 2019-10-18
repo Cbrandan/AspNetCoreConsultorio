@@ -18,10 +18,10 @@ namespace AspNetCoreConsultorio.Services
         }
 
 
-        public async Task<Sexo[]> GetSexosAsync()
+        public async Task<List<Sexo>> GetSexosAsync()
         {
             //throw new NotImplementedException();
-            return await _context.TablaSexos.ToArrayAsync();
+            return await _context.TablaSexos.ToListAsync();
         }
 
         public async Task<Sexo> GetSexosByIdAsync(Guid Id)

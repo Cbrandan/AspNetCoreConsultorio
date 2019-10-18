@@ -24,10 +24,10 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.Property<string>("Apellido")
                         .IsRequired();
 
-                    b.Property<DateTimeOffset?>("Fecha_Alta")
+                    b.Property<DateTime?>("Fecha_Alta")
                         .IsRequired();
 
-                    b.Property<DateTimeOffset>("Fecha_Nacimiento");
+                    b.Property<DateTime>("Fecha_Nacimiento");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
@@ -57,12 +57,12 @@ namespace AspNetCoreConsultorio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5155da31-fc90-4eeb-9b19-696a282396d2"),
+                            Id = new Guid("9f4e68b8-fc96-4414-99b2-20202e28fd83"),
                             Name = "Masculino"
                         },
                         new
                         {
-                            Id = new Guid("2ecdcb42-d337-4e1c-9922-10d83dc120ce"),
+                            Id = new Guid("6469b105-cfb4-4080-9591-2a13fd22307e"),
                             Name = "Femenino"
                         });
                 });

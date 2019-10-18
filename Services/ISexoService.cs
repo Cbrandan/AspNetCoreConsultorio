@@ -8,7 +8,7 @@ namespace AspNetCoreConsultorio.Services
 {
     public interface ISexoService
     {
-        Task<Sexo[]> GetSexosAsync();
+        Task<List<Sexo>> GetSexosAsync();
         Task<Sexo> GetSexosByIdAsync(Guid Id);
     }
 }

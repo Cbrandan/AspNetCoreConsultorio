@@ -21,8 +21,8 @@ namespace AspNetCoreConsultorio.Models.Pacientes
         [Required]
         public List<Sexo> Sexos { get; set; }
         [Required]
-        public DateTimeOffset Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
         [Required]
-        public DateTimeOffset? Fecha_Alta { get; set; }
+        public DateTime? Fecha_Alta { get; set; }
     }
 }

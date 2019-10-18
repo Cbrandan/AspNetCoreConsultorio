@@ -1,5 +1,6 @@
 using AspNetCoreConsultorio.Data;
 using AspNetCoreConsultorio.Models;
+using AspNetCoreConsultorio.Models.Pacientes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -10,16 +11,20 @@ namespace AspNetCoreConsultorio.Services
     class PacienteItemService : IPacienteItemService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISexoService _iSexoService;
 
-        public PacienteItemService(ApplicationDbContext context)
+        public PacienteItemService(
+            ApplicationDbContext context,
+            ISexoService sexoService)
         {
             _context = context;
+            _iSexoService = sexoService;
         }
 
         public async Task<bool> AddPacienteAsync(Paciente newPaciente)
         {
             //throw new NotImplementedException();
-            newPaciente.Fecha_Alta = DateTimeOffset.Now.Date;
+            newPaciente.Fecha_Alta = DateTime.Now;
             _context.Pacientes.Add(newPaciente);
             var saveResult = await _context.SaveChangesAsync();
             return saveResult == 1;
@@ -44,25 +49,29 @@ namespace AspNetCoreConsultorio.Services
 
         public async Task<Paciente> GetPacienteAsync(int dni)
         {
-            var paciente = await _context.Pacientes.Where(x => x.DNI == dni).FirstOrDefaultAsync();
+            var paciente = await _context.Pacientes
+            .Include(p=> p.Sexo)
+            .Where(x => x.DNI == dni).FirstOrDefaultAsync();
             return paciente;
         }
 
-        public async Task<bool> ModifyPacienteAsync(Paciente modPaciente)
+        public async Task<bool> ModifyPacienteAsync(PacienteAddViewModel modPaciente)
         {
-            var paciente = await _context.Pacientes.Where(x => x.DNI == modPaciente.DNI).FirstOrDefaultAsync();
+            var paciente = await _context.Pacientes
+                .Include(p => p.Sexo)
+                .Where(x => x.DNI == modPaciente.DNI).FirstOrDefaultAsync();
 
             if (paciente == null)
                 return false;
 
             paciente.Apellido = modPaciente.Apellido;
             paciente.Nombre = modPaciente.Nombre;
-            paciente.Sexo = modPaciente.Sexo;
+            paciente.Sexo = await _iSexoService.GetSexosByIdAsync(modPaciente.SexoId);
             paciente.Fecha_Nacimiento = modPaciente.Fecha_Nacimiento;
             paciente.Fecha_Alta = modPaciente.Fecha_Alta;
-
-            //_context.Pacientes.UpdateRange(paciente);
-
+            
+            _context.Pacientes.UpdateRange(paciente);
+            
             var saveResult = await _context.SaveChangesAsync();
 
             return saveResult == 1;

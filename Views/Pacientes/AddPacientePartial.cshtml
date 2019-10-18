@@ -24,18 +24,13 @@
         <div class="row">
             <div class="col-sm-4 form-horizontal">
                 <br>
-                    @*<select asp-for="Sexo" class="form-control" placeholder="Seleccione sexo" required autofocus>
-                            <option selected>Seleccione sexo</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>*@
-
-                    <select asp-for="SexoId" asp-items="@(new SelectList(Model.Sexos, "SexoId", "Name"))" class="form-control"></select>
+                    <select asp-for="SexoId" asp-items="@(new SelectList(Model.Sexos, "Id", "Name"))" class="form-control"></select>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="date" asp-for="Fecha_Nacimiento" class="form-control" name="FechaNacimiento" value="04/09/2019" required autofocus>
+                <!-- <input type="date" asp-for="Fecha_Nacimiento" class="form-control" name="FechaNacimiento" value="04/09/2019" required autofocus> -->
+                <input type="date" asp-for="Fecha_Nacimiento" class="form-control" id="datepicker" placeholder="dd/MM/yyyy" autocomplete="off"/>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
@@ -48,3 +43,12 @@
         </div>
     </form>
 </div>
+
+@section Scripts{
+	<script type="text/javascript">
+		$('#datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			uiLibrary: 'bootstrap4'
+		});
+	</script>
+}

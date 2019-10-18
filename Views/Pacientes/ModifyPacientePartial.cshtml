@@ -1,4 +1,7 @@
-@model Paciente
+@using AspNetCoreConsultorio.Models.Pacientes
+@using AspNetCoreConsultorio.Models.Sexos
+
+@model PacienteAddViewModel
 <div class="container">
     <form asp-action="ModifyPaciente" method="post">
         <div class="row">
@@ -9,33 +12,39 @@
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido">
+                    <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido">
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre">
+                    <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre">
                 <br>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Sexo" value="@Model.Sexo">
+                    <!-- <input type="text" class="form-control" asp-for="Sexos" value="@Model.Sexos" disabled> -->
+                    <select asp-for="SexoId" asp-items="@(new SelectList(Model.Sexos, "Id", "Name"))" class="form-control" value="@Model.SexoId"></select>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="date" class="form-control" asp-for="Fecha_Nacimiento" value="@Model.Fecha_Nacimiento">
+                <input type="text" class="form-control" asp-for="Fecha_Nacimiento" Id="datapicker" value="@Model.Fecha_Nacimiento">
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
-                <div class="btn-group">
-                    <br>
-                        <button type="submit" class="btn btn-outline-success">Aceptar</button>
-                        <button href="Pacientes" class="btn btn-outline-danger">Cancelar</button>
-                    <br>
-                </div>
+                <br>
+                    <input type="text" class="form-control" asp-for="Fecha_Alta" Id="datapicker" value="@Model.Fecha_Alta">
+                <br>
+            </div>
+        </div>
+        <div class="col-sm-4 form-horizontal">
+            <div class="btn-group">
+                <br>
+                    <button type="submit" class="btn btn-outline-success">Aceptar</button>
+                    <button href="Pacientes" class="btn btn-outline-danger">Cancelar</button>
+                <br>
             </div>
         </div>
     </form>

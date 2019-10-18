@@ -1,4 +1,7 @@
-@model Paciente
+@using AspNetCoreConsultorio.Models.Pacientes
+@using AspNetCoreConsultorio.Models.Sexos
+
+@model PacienteAddViewModel
 <div class="container">
     <form asp-action="form-group">
         <div class="row">
@@ -9,31 +12,41 @@
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido" disabled>
+                    <input type="text" class="form-control" asp-for="Apellido" value="@Model.Apellido" disabled>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre" disabled>
+                    <input type="text" class="form-control" asp-for="Nombre" value="@Model.Nombre" disabled>
                 <br>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="text" class="form-control" asp-for="Sexo" value="@Model.Sexo" disabled>
+                    <!-- <input type="text" class="form-control" asp-for="Sexos" value="@Model.Sexos" disabled> -->
+                    <select asp-for="SexoId" asp-items="@(new SelectList(Model.Sexos, "Id", "Name"))" class="form-control" value="@Model.SexoId" disabled></select>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                <input type="date" class="form-control" asp-for="Fecha_Nacimiento" value="@Model.Fecha_Nacimiento" disabled>
+                <input type="text" class="form-control" asp-for="Fecha_Nacimiento" Id="datapicker" value="@Model.Fecha_Nacimiento" disabled>
                 <br>
             </div>
             <div class="col-sm-4 form-horizontal">
                 <br>
-                    <a href="Pacientes" class="btn btn-outline-secondary">Atras</a>
+                    <input type="text" class="form-control" asp-for="Fecha_Alta" Id="datapicker" value="@Model.Fecha_Alta" disabled>
                 <br>
             </div>
         </div>
+        <a href="Pacientes" class="btn btn-outline-secondary">Atras</a>
     </form>
 </div>
+@section Scripts{
+	<script type="text/javascript">
+		$('#datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			uiLibrary: 'bootstrap4'
+		});
+	</script>
+}

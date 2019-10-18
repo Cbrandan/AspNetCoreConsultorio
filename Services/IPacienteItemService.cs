@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetCoreConsultorio.Models;
+using AspNetCoreConsultorio.Models.Pacientes;
 
 namespace AspNetCoreConsultorio.Services
 {
@@ -11,6 +12,6 @@ namespace AspNetCoreConsultorio.Services
         Task<bool> AddPacienteAsync(Paciente newPaciente);
         Task<bool> BorrarPacienteAsync(int dni);
         Task<Paciente> GetPacienteAsync(int dni);
-        Task<bool> ModifyPacienteAsync(Paciente modPaciente);
+        Task<bool> ModifyPacienteAsync(PacienteAddViewModel modPaciente);
     }
 }

@@ -33,9 +33,9 @@ namespace AspNetCoreConsultorio.Models
         [Required]
         public virtual Sexo Sexo { get; set; }
         [Required]
-        public DateTimeOffset Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
         [Required]
-        public DateTimeOffset? Fecha_Alta { get; set; }
+        public DateTime? Fecha_Alta { get; set; }
 
 /*         public Paciente(int dni, string apellido, string nombre, char sexo, DateTimeOffset fecha_nacimiento, DateTimeOffset fecha_alta)
         {

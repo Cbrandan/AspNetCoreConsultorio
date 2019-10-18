@@ -13,9 +13,12 @@ namespace AspNetCoreConsultorio.Controllers
     public class PacientesController : Controller
     {
         private readonly IPacienteItemService _PacienteItemService;
-        public PacientesController(IPacienteItemService PacienteItemService)
+        private readonly  ISexoService _sexoService;
+        public PacientesController(IPacienteItemService PacienteItemService, ISexoService sexoService)
         {
             _PacienteItemService = PacienteItemService;
+            _sexoService = sexoService;
+
         }
 
         public async Task<IActionResult> Pacientes()
@@ -30,12 +33,21 @@ namespace AspNetCoreConsultorio.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> AddPaciente(Paciente newPaciente)
+        public async Task<IActionResult> AddPaciente(PacienteAddViewModel ModelPaciente)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Pacientes");
+                return BadRequest(ModelState);
             }
+            
+            var newPaciente = new Paciente{
+                DNI              = ModelPaciente.DNI,
+                Apellido         = ModelPaciente.Apellido,
+                Nombre           = ModelPaciente.Nombre,
+                Sexo             = _sexoService.GetSexosByIdAsync(ModelPaciente.SexoId).Result,
+                Fecha_Nacimiento = ModelPaciente.Fecha_Nacimiento
+            };
+
             var successful = await _PacienteItemService.AddPacienteAsync(newPaciente);
             if (!successful)
             {
@@ -45,10 +57,13 @@ namespace AspNetCoreConsultorio.Controllers
         }
 
         [HttpGet]
-        public ViewResult AddPaciente()
+        public async Task<ViewResult> AddPaciente()
         {
             // Paciente Model = new Paciente();
-            PacienteAddViewModel Model = new PacienteAddViewModel();
+            PacienteAddViewModel Model = new PacienteAddViewModel{
+                Fecha_Nacimiento = DateTime.Now,
+                Sexos = await _sexoService.GetSexosAsync()
+            };
 
             return View("AddPacientePartial", Model);
         }
@@ -70,12 +85,18 @@ namespace AspNetCoreConsultorio.Controllers
         public async Task<IActionResult> Paciente(int dniPaciente, char Modo)
         {
             var ItemPaciente = await _PacienteItemService.GetPacienteAsync(dniPaciente);
-            var model = new Paciente()
+            
+            if (!ModelState.IsValid)
             {
+                return BadRequest(ModelState);
+            }
+
+            var model = new PacienteAddViewModel{
                 DNI = ItemPaciente.DNI,
                 Apellido = ItemPaciente.Apellido,
                 Nombre = ItemPaciente.Nombre,
-                Sexo = ItemPaciente.Sexo,
+                SexoId = ItemPaciente.Sexo.Id,
+                Sexos = await _sexoService.GetSexosAsync(),
                 Fecha_Nacimiento = ItemPaciente.Fecha_Nacimiento,
                 Fecha_Alta = ItemPaciente.Fecha_Alta
             };
@@ -97,11 +118,11 @@ namespace AspNetCoreConsultorio.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> ModifyPaciente(Paciente modPaciente)
+        public async Task<IActionResult> ModifyPaciente(PacienteAddViewModel modPaciente)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Pacientes");
+                //return RedirectToAction("Pacientes");
             }
             var successful = await _PacienteItemService.ModifyPacienteAsync(modPaciente);
 

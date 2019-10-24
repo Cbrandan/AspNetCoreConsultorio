@@ -1,0 +1,75 @@
+@model AdministrarUsuariosViewModel
+
+@{ var Title = "Listado de usuarios por rol";}
+@{ViewData["Title"] =Title;}
+
+<div class="jumbotron text-center">
+    <h1>@Title</h1>
+</div>
+
+<h3>Administradores</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Administrators)
+    {
+<tr>
+    <td>@user.Id</td>
+    <td>@user.Email</td>
+    <td align="center">
+        <form asp-action="ModifyRol" method="POST">
+            <input type="submit" class="btn btn-link" value="Cambiar rol" />
+            <input type="hidden" name="Id" value="@user.Id" />
+        </form>
+    </td>
+</tr>
+    }
+</table>
+<h3>Medicos</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+            <td align="center">
+                <form asp-action="ModifyRol" method="POST">
+                    <input type="submit" class="btn btn-link" value="Cambiar rol" />
+                    <input type="hidden" name="Id" value="@user.Id" />
+                </form>
+            </td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Medicos)
+    {
+<tr>
+    <td>@user.Id</td>
+    <td>@user.Email</td>
+    <td align="center">
+        <form asp-action="ModifyRol" method="POST">
+            <input type="submit" class="btn btn-link" value="Cambiar rol" />
+            <input type="hidden" name="Id" value="@user.Id" />
+        </form>
+    </td>
+</tr>
+    }
+</table>
+<h3>Todos</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Everyone)
+    {
+    <tr>
+        <td>@user.Id</td>
+        <td>@user.Email</td>
+    </tr>
+    }
+</table>

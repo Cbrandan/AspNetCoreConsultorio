@@ -8,5 +8,7 @@ namespace AspNetCoreConsultorio.Data
     public static class Constantes
     {
         public const string AdministratorRole = "Administrator";
+        public const string MedicosRole = "Medicos";
+
     }
 }

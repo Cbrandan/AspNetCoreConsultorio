@@ -10,24 +10,35 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCoreConsultorio.Controllers
 {
     [Authorize(Roles = AspNetCoreConsultorio.Data.Constantes.AdministratorRole)]
-    public class ManageUsersController : Controller
+    //[Authorize]
+    public class ManageUsersControler : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        public ManageUsersController(UserManager<IdentityUser> userManager)
+        public ManageUsersControler(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
         }
         
         public async Task<IActionResult> AdmUsers()
         {
-            var admins = (await _userManager.GetUsersInRoleAsync(AspNetCoreConsultorio.Data.Constantes.AdministratorRole)).ToArray();
+            var admins   = (await _userManager
+                                .GetUsersInRoleAsync(AspNetCoreConsultorio.Data.Constantes.AdministratorRole))
+                                .ToArray();
+
+            var medicos  = (await _userManager
+                                .GetUsersInRoleAsync(AspNetCoreConsultorio.Data.Constantes.MedicosRole))
+                                .ToArray();
+
             var everyone = await _userManager.Users.ToArrayAsync();
+
             var model = new AdministrarUsuariosViewModel
             {
                 Administrators = admins,
-                Everyone = everyone
+                Medicos        = medicos,
+                Everyone       = everyone
             };
-            return View(model);
+
+            return View("/Views/Usuarios/ManageUsers.cshtml", model);
         }
 }
 }

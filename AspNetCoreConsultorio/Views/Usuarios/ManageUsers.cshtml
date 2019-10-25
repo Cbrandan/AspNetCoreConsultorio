@@ -35,6 +35,13 @@
         <tr>
             <td>Id</td>
             <td>Email</td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Medicos)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
             <td align="center">
                 <form asp-action="ModifyRol" method="POST">
                     <input type="submit" class="btn btn-link" value="Cambiar rol" />
@@ -42,19 +49,6 @@
                 </form>
             </td>
         </tr>
-    </thead>
-    @foreach (var user in Model.Medicos)
-    {
-<tr>
-    <td>@user.Id</td>
-    <td>@user.Email</td>
-    <td align="center">
-        <form asp-action="ModifyRol" method="POST">
-            <input type="submit" class="btn btn-link" value="Cambiar rol" />
-            <input type="hidden" name="Id" value="@user.Id" />
-        </form>
-    </td>
-</tr>
     }
 </table>
 <h3>Todos</h3>
@@ -67,9 +61,15 @@
     </thead>
     @foreach (var user in Model.Everyone)
     {
-    <tr>
-        <td>@user.Id</td>
-        <td>@user.Email</td>
-    </tr>
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td align="center">
+                <form asp-action="ModifyRol" method="POST">
+                    <input type="submit" class="btn btn-link" value="Cambiar rol" />
+                    <input type="hidden" name="Id" value="@user.Id" />
+                </form>
+            </td>
+        </tr>
     }
 </table>

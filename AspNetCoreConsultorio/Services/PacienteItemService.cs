@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreConsultorio.Services
 {
-    class PacienteItemService : IPacienteItemService
+    public class PacienteItemService : IPacienteItemService
     {
         private readonly ApplicationDbContext _context;
         private readonly ISexoService _iSexoService;
